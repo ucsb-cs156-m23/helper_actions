@@ -11,19 +11,13 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Add reviewers
-        uses: actions/github-script@v4
+        uses: actions/github-script@v6
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            const repo = context.repo
-            console.log(repo)
-            const owner = context.repo.owner
-            console.log(owner)
-            // owner is the organization name
-            
             // get all the teams in the organization
-            const teams = await github.teams.list({
-              org: owner,
-              per_page: 100
+            const teams = await github.rest.repos.listTeams({
+              owner: context.repo.owner
+              repo: context.repo
             })
             console.log(teams);
