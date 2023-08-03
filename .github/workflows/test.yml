@@ -1,0 +1,22 @@
+name: TEST CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test_ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Add reviewers
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const repo = context.repo.repo
+            console.log(repo)
+            const owner = context.repo.owner
+            console.log(owner)
+            // owner should be a team
