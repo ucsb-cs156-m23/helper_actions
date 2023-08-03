@@ -16,8 +16,6 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             // get all the teams in the organization
-            const teams = await github.rest.repos.listTeams({
-              owner: context.repo.owner
-              repo: context.repo
-            })
-            console.log(teams);
+            const repos = await github.rest.repos
+            // list all methods available for the repos object
+            console.log(Object.getOwnPropertyNames(repos))
