@@ -15,8 +15,13 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            const repo = context.repo.repo
+            const repo = context.repo
             console.log(repo)
             const owner = context.repo.owner
             console.log(owner)
-            // owner should be a team
+            // owner is the organization name
+            // now get the access info of the repo
+            const access = await github.repos.get({
+              owner: owner,
+              repo: repo
+            })
