@@ -20,8 +20,10 @@ jobs:
             const owner = context.repo.owner
             console.log(owner)
             // owner is the organization name
-            // now get the access info of the repo
-            const access = await github.repos.get({
-              owner: owner,
-              repo: repo
+            
+            // get all the teams in the organization
+            const teams = await github.teams.list({
+              org: owner,
+              per_page: 100
             })
+            console.log(teams);
